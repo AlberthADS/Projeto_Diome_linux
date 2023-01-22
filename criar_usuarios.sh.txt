@@ -1,0 +1,41 @@
+#!/bin/bash
+
+cd /
+
+echo "criação de usuários, diretórios, grupos e permissões"
+
+echo "criando diretórios"
+mkdir "publico" "adm" "ven" "sec"
+
+echo "criando grupos"
+groupadd GRP_ADM
+groupadd GRP_VEN
+groupadd GRP_SEC
+
+echo "***criando usuários e alocando-os para os grupos diretamente***"
+echo "usuários do 'GRP_ADM'"
+useradd carlos -c "Carlos Godoi" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_ADM
+useradd maria -c "Maria do Bairro" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_ADM
+useradd joao -c "João da Silva" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_ADM
+
+echo "***usuários do 'GRP_VEN'***"
+useradd debora -c "Débora Nascimento" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_VEN
+useradd roberto -c "Roberto Carlos" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_VEN
+useradd sebastiana -c "Sebastiana Lazarento" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_VEN
+
+echo "***usuário do 'GRP_SEC'***"
+useradd josefina -c "Josefina de Jesus" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_SEC
+useradd amanda -c "Amanda Tetroriano" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_SEC
+useradd rogerio -c "Rogério Cardoso" -m -s /bin/bash -p $(openssl passwd -6 Senha123) -G GRP_SEC
+
+echo "***definindo permissão total no diretório '/publico'***"
+chmod 777 "publico"
+
+echo "definindo permissões dos diretórios"
+chmod 770 "adm" "ven" "sec"
+
+chown root:GRP_ADM /adm/
+chown root:GRP_VEN /ven/
+chown root:GRP_SEC /sec/
+
+root@servidor1:/scripts#
