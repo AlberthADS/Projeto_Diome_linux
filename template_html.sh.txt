@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo 'DIRETÓRIO PARA EXTRAIR O WEBSITE'
+cd /data/app-web
+
+echo 'EXTRAINDO O WEBSITE...'
+wget http://site1368633667.hospedagemdesites.ws/site1.zip
+
+echo 'DESCOMPACTANDO O ARQUIVO...'
+unzip site1.zip
+
+echo 'EXCLUINDO O ARQUIVO BAIXADO...'
+rm site1.zip
+
+echo 'INSTALANDO O DOCKER-COMPOSE DO APACHE'
+cd /compose/aplicacao-web/
+docker-compose up -d
+
